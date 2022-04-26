@@ -13,6 +13,8 @@ public class BubbleFrame extends JFrame{
 	
 	private Player player;
 	
+	public boolean w, a, s, d, space;
+	
 	public BubbleFrame() {
 		initObject();
 		initSetting();
@@ -32,6 +34,12 @@ public class BubbleFrame extends JFrame{
 	}
 	
 	private void initSetting() {
+		w = false;
+		a = false;
+		s = false;
+		d = false;
+		space = false;
+		
 		setSize(1000, 640);
 		getContentPane().setLayout(null);
 		
@@ -51,7 +59,7 @@ public class BubbleFrame extends JFrame{
 						}
 						break;
 					case KeyEvent.VK_A:
-						if (!player.isLeft() && !player.isRight())
+						if (!player.isLeft() && !player.isRight() && !player.isLeftWallCollide())
 						{
 							player.left();
 						}
@@ -60,7 +68,7 @@ public class BubbleFrame extends JFrame{
 					//	player.down();
 					//	break;
 					case KeyEvent.VK_D:
-						if (!player.isRight() && !player.isLeft())
+						if (!player.isRight() && !player.isLeft() && !player.isRightWallCollide())
 						{
 							player.right();
 						}

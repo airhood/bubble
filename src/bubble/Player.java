@@ -13,7 +13,9 @@ public class Player extends JLabel implements Moveable {
 	private int x;
 	private int y;
   
-	public boolean left, right, up, down;
+	private boolean left, right, up, down;
+	
+	private boolean leftWallCollide, rightWallCollide;
 
 	private ImageIcon playerR, playerL;
 	
@@ -41,6 +43,9 @@ public class Player extends JLabel implements Moveable {
 		right = false;
 		up = false;
 		down = false;
+		
+		leftWallCollide = false;
+		rightWallCollide = false;
 
 		setIcon(playerR);
 		setSize(50, 50);

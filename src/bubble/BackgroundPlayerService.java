@@ -29,9 +29,18 @@ public class BackgroundPlayerService implements Runnable{
 			System.out.println("leftColor : " + leftColor + " | rightColor : " + rightColor);
 			
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {
+				player.setRightWallCollide(false);
 				System.out.println("왼쪽 벽에 충돌함");
+				player.setLeft(false);
+				player.setLeftWallCollide(true);
 			} else if (rightColor.getRed() == 255 && rightColor.getGreen() == 0 && rightColor.getBlue() == 0) {
+				player.setLeftWallCollide(false);
 				System.out.println("오른쪽 벽에 충돌함");
+				player.setRight(false);
+				player.setRightWallCollide(true);
+			} else {
+				player.setLeftWallCollide(false);
+				player.setRightWallCollide(false);
 			}
 			
 			try {
