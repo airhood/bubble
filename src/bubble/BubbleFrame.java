@@ -21,7 +21,7 @@ public class BubbleFrame extends JFrame{
 	}
 	
 	private void initObject() {
-		backgroundMap = new JLabel(new ImageIcon("image/backgroundMap.png"));
+		backgroundMap = new JLabel(new ImageIcon("image/test.png"));
 		setContentPane(backgroundMap);
 		
 		player = new Player();
@@ -45,13 +45,13 @@ public class BubbleFrame extends JFrame{
 			public void keyPressed(KeyEvent e) {				
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_W:
-						if (!player.isUp())
+						if (!player.isUp() && !player.isDown())
 						{
 							player.up();
 						}
 						break;
 					case KeyEvent.VK_A:
-						if (!player.isLeft())
+						if (!player.isLeft() && !player.isRight())
 						{
 							player.left();
 						}
@@ -60,11 +60,15 @@ public class BubbleFrame extends JFrame{
 					//	player.down();
 					//	break;
 					case KeyEvent.VK_D:
-						if (!player.isRight())
+						if (!player.isRight() && !player.isLeft())
 						{
 							player.right();
 						}
 						break;
+					case KeyEvent.VK_SPACE:
+						if (!player.isUp() && !player.isDown()) {
+							player.up();
+						}
 				}
 			}
 			
@@ -78,6 +82,8 @@ public class BubbleFrame extends JFrame{
 						break;
 					case KeyEvent.VK_D:
 						player.setRight(false);
+						break;
+					case KeyEvent.VK_SPACE:
 						break;
 				}
 			}

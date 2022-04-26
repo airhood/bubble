@@ -12,18 +12,20 @@ public class Player extends JLabel implements Moveable {
 
 	private int x;
 	private int y;
-
+  
 	public boolean left, right, up, down;
 
 	private ImageIcon playerR, playerL;
 	
 	
-	private int speed = 3;
+	private final int moveSpeed = 3;
+	private final int jumpSpeed = 4;
 	
 
 	public Player() {
 		initObject();
 		initSetting();
+		initBackgroundPlayerService();
 	}
 
 	private void initObject() {
@@ -44,6 +46,10 @@ public class Player extends JLabel implements Moveable {
 		setSize(50, 50);
 		setLocation(x, y);
 	}
+	
+	private void initBackgroundPlayerService() {
+		new Thread(new BackgroundPlayerService(this)).start();
+	}
 
 	@Override
 	public void left() {
@@ -51,12 +57,11 @@ public class Player extends JLabel implements Moveable {
 		new Thread(() -> {
 			while (left) {
 				setIcon(playerL);
-				x = x - speed;
+				x = x - moveSpeed;
 				setLocation(x, y);
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -70,12 +75,11 @@ public class Player extends JLabel implements Moveable {
 		new Thread(() -> {
 			while (right) {
 				setIcon(playerR);
-				x = x + speed;
+				x = x + moveSpeed;
 				setLocation(x, y);
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -86,19 +90,36 @@ public class Player extends JLabel implements Moveable {
 	public void up() {
 		up = true;
 		new Thread(() -> {
-			while (up) {
+			for(int i = 0; i < 120 / jumpSpeed; i++) {
+				y  = y - jumpSpeed;
+				setLocation(x, y);
 				try {
-					Thread.sleep(10);
+					Thread.sleep(8);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
+			
+			up = false;
+			down();
+			
 		}).start();
 	}
 
 	@Override
 	public void down() {
-
+		down = true;
+		new Thread(() -> {
+			for(int i = 0; i < 120 / jumpSpeed; i++) {
+				y = y + jumpSpeed;
+				setLocation(x, y);
+				try {
+					Thread.sleep(7);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			down = false;
+		}).start();
 	}
 }
