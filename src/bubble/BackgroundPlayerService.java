@@ -14,7 +14,7 @@ public class BackgroundPlayerService implements Runnable{
 	public BackgroundPlayerService(Player player) {
 		this.player = player;
 		try {
-			image = ImageIO.read(new File("image/backgroundMapService.png"));
+			image = ImageIO.read(new File("src/image/backgroundMapService.png"));
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}

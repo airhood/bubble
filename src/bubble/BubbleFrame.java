@@ -15,8 +15,6 @@ public class BubbleFrame extends JFrame{
 	
 	public boolean w, a, s, d, space;
 	
-	public int num;
-	
 	public BubbleFrame() {
 		initObject();
 		initSetting();
@@ -47,7 +45,7 @@ public class BubbleFrame extends JFrame{
 	}
 	
 	private void initObject() {
-		backgroundMap = new JLabel(new ImageIcon("image/backgroundMapService.png"));
+		backgroundMap = new JLabel(new ImageIcon("src/image/backgroundMapService.png"));
 		setContentPane(backgroundMap);
 		
 		player = new Player();
