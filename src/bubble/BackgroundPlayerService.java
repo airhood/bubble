@@ -23,22 +23,26 @@ public class BackgroundPlayerService implements Runnable{
 	@Override
 	public void run() {
 		while(true) {
-			Color leftColor = new Color(image.getRGB(player.getX() - (-1), player.getY() + 25));
+			Color leftColor = new Color(image.getRGB(player.getX() + 1, player.getY() + 25));
 			Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY() + 25));
-			int bottomColor = image.getRGB(player.getX() + 50 + 10, player.getY() + 50 + 5);
+			int bottomColorLeft = image.getRGB(player.getX() + 50 + 0, player.getY() + 50 + 5);
+			int bottomColorRight = image.getRGB(player.getX(), player.getY() + 50 + 5);
 			
 			//System.out.println(bottomColor);
 			
 			//System.out.println("leftColor : " + leftColor + " | rightColor : " + rightColor);
 			
 			
-			if (bottomColor != -1) {
+			if (bottomColorLeft != -1 || bottomColorRight != -1) {
 				player.setStanding(true);
 				//System.out.println("bottom collision");
 				player.setDown(false);
 			} else {
 				player.setStanding(false);
-				//player.down();
+				
+				if (!player.isUp() && !player.isDown()) {
+					player.down();
+				}
 			}
 			
 			
