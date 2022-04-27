@@ -23,6 +23,15 @@ public class Player extends JLabel implements Moveable {
 	private final int moveSpeed = 3;
 	private final int jumpSpeed = 4;
 	
+	private final int defaultX = 120;
+	private final int defaultY = 531;
+	
+	private int currentFloor;
+	
+	private BackgroundPlayerService BPS;
+	
+	private boolean standing;
+	
 
 	public Player() {
 		initObject();
@@ -36,16 +45,20 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	private void initSetting() {
-		x = 120;
-		y = 535;
+		x = defaultX;
+		y = defaultY;
 
 		left = false;
 		right = false;
 		up = false;
 		down = false;
 		
+		currentFloor = 1;
+		
 		leftWallCollide = false;
 		rightWallCollide = false;
+		
+		standing = true;
 
 		setIcon(playerR);
 		setSize(50, 50);
@@ -105,6 +118,8 @@ public class Player extends JLabel implements Moveable {
 				}
 			}
 			
+			currentFloor++;
+			
 			up = false;
 			down();
 			
@@ -115,7 +130,7 @@ public class Player extends JLabel implements Moveable {
 	public void down() {
 		down = true;
 		new Thread(() -> {
-			for(int i = 0; i < 120 / jumpSpeed; i++) {
+			while(down) {
 				y = y + jumpSpeed;
 				setLocation(x, y);
 				try {
@@ -124,6 +139,54 @@ public class Player extends JLabel implements Moveable {
 					e.printStackTrace();
 				}
 			}
+			
+			if (currentFloor <= 4) {
+//				switch ((int)Math.floor(defaultY - y / 120)) {
+//				case 0:
+//					currentFloor = 1;
+//					break;
+//				case 1:
+//					currentFloor = 2;
+//					break;
+//				case 2:
+//					currentFloor = 3;
+//					break;
+//				case 3:
+//					currentFloor = 4;
+//					break;
+//				}
+				
+				if (y <= 536 && y > 420) {
+					currentFloor = 1;
+				} else if (y <= 420 && y > 330) {
+					currentFloor = 2;
+				} else if (y <= 330 && y > 280) {
+					currentFloor = 3;
+				} else if (y <= 280) {
+					currentFloor = 4;
+				}
+				
+				//y = defaultY - ((currentFloor - 1) * 120);
+				
+				switch(currentFloor) {
+					case 1:
+						y = 531;
+						break;
+					case 2:
+						y = 415;
+						break;
+					case 3:
+						y = 295;
+						break;
+					case 4:
+						y = 175;
+						break;
+						
+				}
+			}
+			
+			setLocation(x, y);
+			
 			down = false;
 		}).start();
 	}

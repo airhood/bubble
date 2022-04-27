@@ -33,6 +33,17 @@ public class BubbleFrame extends JFrame{
 				}
 			}
 		}).start();
+		
+		while(true) {
+			System.out.println("player x: " + player.getX() + " | player y: " + player.getY());
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private void initObject() {

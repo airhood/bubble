@@ -25,8 +25,22 @@ public class BackgroundPlayerService implements Runnable{
 		while(true) {
 			Color leftColor = new Color(image.getRGB(player.getX() - (-1), player.getY() + 25));
 			Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY() + 25));
+			int bottomColor = image.getRGB(player.getX() + 50 + 10, player.getY() + 50 + 5);
+			
+			//System.out.println(bottomColor);
 			
 			//System.out.println("leftColor : " + leftColor + " | rightColor : " + rightColor);
+			
+			
+			if (bottomColor != -1) {
+				player.setStanding(true);
+				//System.out.println("bottom collision");
+				player.setDown(false);
+			} else {
+				player.setStanding(false);
+				//player.down();
+			}
+			
 			
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {
 				player.setRightWallCollide(false);
@@ -42,6 +56,7 @@ public class BackgroundPlayerService implements Runnable{
 				player.setLeftWallCollide(false);
 				player.setRightWallCollide(false);
 			}
+			
 			
 			try {
 				Thread.sleep(10);
