@@ -26,7 +26,7 @@ public class BackgroundPlayerService implements Runnable{
 			Color leftColor = new Color(image.getRGB(player.getX() - (-1), player.getY() + 25));
 			Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY() + 25));
 			
-			System.out.println("leftColor : " + leftColor + " | rightColor : " + rightColor);
+			//System.out.println("leftColor : " + leftColor + " | rightColor : " + rightColor);
 			
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {
 				player.setRightWallCollide(false);
