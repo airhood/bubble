@@ -15,6 +15,8 @@ public class BubbleFrame extends JFrame{
 	
 	public boolean w, a, s, d, space;
 	
+	public int num;
+	
 	public BubbleFrame() {
 		initObject();
 		initSetting();
@@ -25,7 +27,7 @@ public class BubbleFrame extends JFrame{
 			while(true) {
 				movementKeyInputProcess();
 				try {
-					Thread.sleep(10);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -97,58 +99,6 @@ public class BubbleFrame extends JFrame{
 	}
 	
 	
-//	public void initListener() {
-//		addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent e) {				
-//				switch(e.getKeyCode()) {
-//					case KeyEvent.VK_W:
-//						if (!player.isUp() && !player.isDown())
-//						{
-//							player.up();
-//						}
-//						break;
-//					case KeyEvent.VK_A:
-//						if (!player.isLeft() && !player.isRight() && !player.isLeftWallCollide())
-//						{
-//							player.left();
-//						}
-//						break;
-//					//case KeyEvent.VK_S:
-//					//	player.down();
-//					//	break;
-//					case KeyEvent.VK_D:
-//						if (!player.isRight() && !player.isLeft() && !player.isRightWallCollide())
-//						{
-//							player.right();
-//						}
-//						break;
-//					case KeyEvent.VK_SPACE:
-//						if (!player.isUp() && !player.isDown()) {
-//							player.up();
-//						}
-//				}
-//			}
-//			
-//			public void keyReleased(KeyEvent e) {
-//				switch(e.getKeyCode()) {
-//					case KeyEvent.VK_W:
-//						player.setUp(false);
-//						break;
-//					case KeyEvent.VK_A:
-//						player.setLeft(false);
-//						break;
-//					case KeyEvent.VK_D:
-//						player.setRight(false);
-//						break;
-//					case KeyEvent.VK_SPACE:
-//						break;
-//				}
-//			}
-//		});
-//	}
-	
-	
 	private void movementKeyInput(String key, boolean state) {
 		//System.out.println("key : " + key + " | state : " + state);
 		
@@ -172,30 +122,22 @@ public class BubbleFrame extends JFrame{
 		if (w || space) {
 			if (!player.isUp() && !player.isDown() && !s) {
 				player.up();
-			} else {
-				player.setUp(false);
 			}
-		} else {
-			player.setUp(false);
 		}
 		
 		if (a) {
 			if (!player.isLeft() && !player.isRight() && !player.isLeftWallCollide() && !d)
 			{
 				player.left();
-			} else {
-				player.setLeft(false);
 			}
 		} else {
 			player.setLeft(false);
 		}
 		
-		if (d) {
+		if (d) {			
 			if (!player.isRight() && !player.isLeft() && !player.isRightWallCollide() && !a)
 			{
 				player.right();
-			} else {
-				player.setRight(false);
 			}
 		} else  {
 			player.setRight(false);
