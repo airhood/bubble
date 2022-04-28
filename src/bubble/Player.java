@@ -40,8 +40,8 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	private void initObject() {
-		playerR = new ImageIcon("image/playerR.png");
-		playerL = new ImageIcon("image/playerL.png");
+		playerR = new ImageIcon("src/image/playerR.png");
+		playerL = new ImageIcon("src/image/playerL.png");
 	}
 
 	private void initSetting() {
